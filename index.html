@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>ctrl + enter</title>
+</head>
+<body>
+    <script src="https://cdn.file3.goodid.com/ID/static/antuan.erp/lib/jquery/jquery.min.js?v=201705111953"></script>
+    <script type="text/javascript">
+        var pushTarget = 0; //记录当前按下的按钮
+        var isPushCtrl = false; //记录ctrl是否处于被按下的状态
+        $(window).on('keydown', function(e) {
+            // keydown事件在按钮处于被按下状态时会无限次触发，
+            // 这里做一个记录和阻止，表明同一个按钮处在被按下状态时，只执行一次。
+            if (pushTarget == e.keyCode) return;
+            pushTarget = e.keyCode;
+
+            // 判断ctrl是否已经被按下
+            if (isPushCtrl = true) {
+                // 判断按下的是否是enter
+                if (e.keyCode == 13) {
+                    console.log('按下enter');
+                    success();
+                    return;
+                }
+                return;
+            }
+            // 判断按下的是否是ctrl
+            if (e.keyCode == 17) {
+                console.log('按下ctrl');
+                isPushCtrl = true;
+            }
+        });
+
+        $(window).on('keyup', function(e) {
+            // 如果ctrl被释放则时间失效
+            if (e.keyCode == 17) {
+                console.log('失效了');
+                isPushCtrl = false;
+            }
+            // 按钮释放，状态清空
+            pushTarget = 0;
+        });
+        function success() {
+            console.log('成功啦');
+        }
+        // 以上解决一个方案，但是有一个bug，当下除了ctrl+enter按钮外第三个按钮，事件依然会被触发，例如按下crl+a+enter
+        // 依然会被识别为ctrl+enter事件
+        // 现在有一个新的结题思路，keydown只负责记录被按下的按钮，keyup负责释放被按下的按钮，只需要判断在keydown时被按下的按钮只有ctrl+enter即可触发事件。
+    </script>
+</body>
+</html>
