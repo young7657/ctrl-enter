@@ -6,6 +6,7 @@
 <body>
     <script src="https://cdn.file3.goodid.com/ID/static/antuan.erp/lib/jquery/jquery.min.js?v=201705111953"></script>
     <script type="text/javascript">
+        //在不使用e.ctrlKey这个值的情况下，通过笨方法，判断ctrl+enter
         var pushTarget = 0; //记录当前按下的按钮
         var isPushCtrl = false; //记录ctrl是否处于被按下的状态
         $(window).on('keydown', function(e) {
